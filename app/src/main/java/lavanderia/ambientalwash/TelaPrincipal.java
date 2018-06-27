@@ -51,6 +51,7 @@ public class TelaPrincipal extends AppCompatActivity
 
                 startActivity(new Intent(TelaPrincipal.this,TelaLogin.class));
                 finish();
+
             }
         });
 
@@ -102,17 +103,23 @@ public class TelaPrincipal extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
+        if (id == R.id.nav_minha_conta) {
             // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        } else if (id == R.id.nav_meus_agendamentos) {
 
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.nav_sair) {
 
-        } else if (id == R.id.nav_manage) {
+        } else if (id == R.id.nav_configuracoes) {
 
-        } else if (id == R.id.nav_share) {
+        } else if (id == R.id.nav_contato) {
 
-        } else if (id == R.id.nav_send) {
+        } else if (id == R.id.nav_quem_somos) {
+
+        }else if (id == R.id.nav_solucao_empresarial){
+
+
+        }else if (id == R.id.nav_servicos){
+
 
         }
 
