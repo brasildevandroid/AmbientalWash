@@ -12,13 +12,14 @@
         <activity
             android:name=".TelaPrincipal"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppLavanderia">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".TelaLogin"></activity>
     </application>
 
 </manifest>
