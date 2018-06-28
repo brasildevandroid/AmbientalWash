@@ -1,14 +1,10 @@
 package lavanderia.ambientalwash;
 
 import android.content.Intent;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
-import android.content.pm.Signature;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
-import android.util.Base64;
-import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -20,11 +16,16 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.firebase.ui.auth.AuthUI;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
+import fragments_comunicacao.FragmentContato;
+import fragments_comunicacao.FragmentQuemSomos;
+import fragments_comunicacao.FragmentServicos;
+import fragments_comunicacao.FragmentSolucaoEmpresarial;
 
 public class TelaPrincipal extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -36,11 +37,12 @@ public class TelaPrincipal extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-
+/*
+       [isso quebra á aplicação]
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-
         Toast.makeText(this,user.getDisplayName(),Toast.LENGTH_SHORT).show();
+*/
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -109,16 +111,54 @@ public class TelaPrincipal extends AppCompatActivity
 
         } else if (id == R.id.nav_sair) {
 
+            //[btn sair ]
+
+                AuthUI.getInstance()
+                        .signOut(this)
+                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                            public void onComplete(@NonNull Task<Void> task) {
+
+                                if (task.isSuccessful()) {
+                                    // user is now signed out
+                                    startActivity(new Intent(TelaPrincipal.this, TelaLogin.class));
+                                    finish();
+
+                                }
+
+                            }
+                        });
+
         } else if (id == R.id.nav_configuracoes) {
 
         } else if (id == R.id.nav_contato) {
 
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.container_tela_principal,new FragmentContato())
+                    .commit();
+
+
         } else if (id == R.id.nav_quem_somos) {
+
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.container_tela_principal,new FragmentQuemSomos())
+                    .commit();
 
         }else if (id == R.id.nav_solucao_empresarial){
 
 
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.container_tela_principal,new FragmentSolucaoEmpresarial())
+                    .commit();
+
         }else if (id == R.id.nav_servicos){
+
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.container_tela_principal,new FragmentServicos())
+                    .commit();
 
 
         }
